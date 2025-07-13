@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CAMPASS</title>
+</head>
+<body>
+    <h1>Welcome, Mutaz!</h1>
+    <p>This is your gyat Flask app page.</p>
+    <h2>Upload your schedule (.ics file)</h2>
+    <form action="/upload-file" method="POST" enctype="multipart/form-data">
+    <input type="file" name="icsfile" accept=".ics" required>
+    <button type="submit">Upload File</button>
+</form>
+</body>
+</html>
