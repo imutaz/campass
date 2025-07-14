@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CAMPASS Upload</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+
+<body class="bg-black text-gray-100 flex items-center justify-center min-h-screen p-4">
+  <main class="w-full max-w-sm">
+    <h1 class="text-3xl font-bold text-center mb-6">
+      Upload Your .ics File
+    </h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="mb-4 p-3 rounded text-center 
+                      {{ 'bg-red-600 text-white' if category=='error' else 'bg-green-600 text-white' }}">
+            {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+          
+    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" class="space-y-4">
+      <div>
+        <label for="icsfile" class="block text-sm font-medium text-white mb-1">
+            Select a .ics file
+        </label>
+        <input
+          id="icsfile"
+          name="icsfile"
+          type="file"
+          accept=".ics"
+          required
+          class="block w-full text-sm text-gray-200
+                 file:bg-gray-700 file:rounded-md file:px-4 file:py-2 file:text-white
+                 bg-transparent border border-gray-600 rounded p-2
+                 focus:outline-none focus:ring-2 focus:ring-white cursor-pointer"
+        />
+      </div>
+
+      <!-- Bold, thick Upload button -->
+      <button
+        type="submit"
+        class="w-full py-3 bg-white text-black font-extrabold uppercase rounded-md
+               hover:bg-gray-200 transition text-lg"
+      >
+        upload
+      </button>
+    </form>
+
+    <p class="text-sm text-gray-400 text-center mt-6">
+      <a href="{{ url_for('logout') }}" class="text-white hover:underline">
+        Log Out
+      </a>
+    </p>
+
+    <footer class="text-center text-white mt-6 font-thin tracking-widest text-s transform scale-x-125">
+      CAMPASS 2025®
+    </footer>
+  </main>
+</body>
+</html>

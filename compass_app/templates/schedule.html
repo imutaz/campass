@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Weekly Class Schedule</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-black text-white min-h-screen p-4">
+  <main class="max-w-5xl mx-auto">
+    <h1 class="text-4xl font-extrabold text-center mb-8">
+      📅 Weekly Class Schedule
+    </h1>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for day, classes in classes_by_day.items() %}
+      <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gray-700 px-4 py-2">
+          <h2 class="text-xl font-semibold">{{ day }}</h2>
+        </div>
+        <div class="p-4 space-y-4">
+          {% if classes %}
+            {% for c in classes %}
+            <div class="bg-gray-700 rounded-md p-3 hover:bg-gray-600 transition">
+              <p class="font-bold mb-1">{{ c.name }}</p>
+              <p class="text-sm text-gray-300">
+                🕒 {{ c.start_time_formatted() }} – {{ c.end_time_formatted() }}
+              </p>
+              <p class="text-sm text-gray-300">📍 {{ c.location }}</p>
+            </div>
+            {% endfor %}
+          {% else %}
+            <p class="text-gray-400 italic">No classes</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Back to Upload styled like the Log Out link -->
+    <p class="text-sm text-gray-400 text-center mt-6">
+      <a href="{{ url_for('upload_file') }}" class="text-white hover:underline">
+        Back to Upload
+      </a>
+    </p>
+
+    <footer class="text-center text-gray-500 mt-12 font-thin tracking-widest text-s transform scale-x-125">
+      CAMPASS 2025®
+    </footer>
+  </main>
+</body>
+</html>
