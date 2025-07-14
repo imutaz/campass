@@ -23,5 +23,5 @@
 ### 1. Clone & set up
 
 ```bash
-git clone https://github.com/your-username/campass.git
+git clone https://github.com/imutaz/campass.git
 cd campass
